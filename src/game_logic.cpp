@@ -1,5 +1,14 @@
 #include "game_logic.h"
 
+/* TODO: Create a function in ezSTR that takes a string and an integer value for the buffer of a
+         console window so it can input newlines dynamically. */
+
+void expo_intro()
+{
+   std::cout << "\nDaydreaming you wake up, the teacher, a Wizard, kicks you out of the classroom" 
+            << "\nover your apathy towards your studies. Go to the principal's office.\n\n" << std::endl;
+}
+
 void update_playerPos(vector2 &playerLoc, room &currentRoom, room *Rooms)
 {
 	for (int i = 0; i < MAX_ROOM_AMT; i++)
@@ -202,6 +211,25 @@ void moveCommand(std::vector<std::string> &commandDir, room *roomsLst, Player &p
    vector2 newMove = player.characterLocation;
    room prevRm = currentLoc;
    bool noRm_F = false;
+
+   if (commandDir[1] == "STATE")
+   {
+      if (GAME_STATE == FREE_ROAM)
+      {
+         GAME_STATE = COMBAT;
+         std::cout << "\n\nGAME_STATE IS NOW " << "COMBAT" << "\n\n" << std::endl;
+      }
+      else if (GAME_STATE == COMBAT)
+      {
+         (GAME_STATE == PUZZLE);
+         std::cout << "\n\nGAME_STATE IS NOW " << "PUZZLE" << "\n\n" << std::endl;
+      }
+      else if(GAME_STATE == PUZZLE)
+      {
+         GAME_STATE = FREE_ROAM;
+         std::cout << "\n\nGAME_STATE IS NOW " << "FREE_ROAM" << "\n\n" << std::endl;
+      }
+   }
 
    if (commandDir[1] == "EAST")
    {
@@ -537,12 +565,36 @@ void parse(std::string &input, Player &player, room &currentRm, room *Rooms)
 
 void PUZZLE_STATE(bool isDEBUG)
 {
+   std::string input;
+   std::vector<std::string> commands;
 
+   std::cout << "#####\n\nPUZZLE STATE\n\n#####\n" << std::endl;
+
+   std::getline(std::cin, input);
+   ezStr::ToLower(input);
+   commands = ezStr::ToVector(input);
+
+   if (commands[0] == "move" && commands[1] == "state")
+   {
+      GAME_STATE = FREE_ROAM;
+   }
 }
 
 void COMBAT_STATE(bool isDEBUG)
 {
+   std::string input;
+   std::vector<std::string> commands;
 
+   std::cout << "#####\n\nCOMBAT STATE\n\n#####\n" << std::endl;
+
+   std::getline(std::cin, input);
+   ezStr::ToLower(input);
+   commands = ezStr::ToVector(input);
+
+   if (commands[0] == "move" && commands[1] == "state")
+   {
+      GAME_STATE = PUZZLE;
+   }
 }
 
 void FREE_ROAM_STATE(bool isDEBUG)
@@ -556,24 +608,42 @@ void FREE_ROAM_STATE(bool isDEBUG)
    set_Rooms(Rooms);
    set_items(Rooms, itemList);
    
-   Player DEBUG_Player;
-   DEBUG_Player.characterName = "**DEBUG_Player";
-   DEBUG_Player.characterLocation = startLoc;
-   update_playerPos(DEBUG_Player.characterLocation, currentRoom, Rooms);
-   set_NPCs(Rooms, DEBUG_Player);
-   giveItem(itemList[0], DEBUG_Player);
+   if (isDEBUG)
+   {
+      Player DEBUG_Player;
+      DEBUG_Player.characterName = "**DEBUG_Player";
+      DEBUG_Player.characterLocation = startLoc;
+      update_playerPos(DEBUG_Player.characterLocation, currentRoom, Rooms);
+      set_NPCs(Rooms, DEBUG_Player);
+      giveItem(itemList[0], DEBUG_Player);
 
-   std::cout << "\nPlease input a command: ";
-   std::getline(std::cin, userInput);
-   DEBUG::echo(userInput);
-   std::cout << "Vallore: ";
-   double inGame_Update = GetCurrentTime();
-   parse(userInput, DEBUG_Player, currentRoom, Rooms);
-   double inGame_InputUpdate = GetCurrentTime();
-   std::cout << "\n" << std::endl;
-   DEBUG::updateTick_Display(inGame_Update, inGame_InputUpdate);
-   std::cout << "*DEBUG* " << "Current PLAYER location is: (" << DEBUG_Player.characterLocation.x
-      << ", " << DEBUG_Player.characterLocation.y << ")" << std::endl;
-   std::cout << "*DEBUG* " << "Current room: " << currentRoom.roomName
-      << "\n*DEBUG* Current Room description: " << currentRoom.roomLook << std::endl;
+      std::wcout << "########### DEBUGGING BUILD: " << gameVer << ", IS ACTIVE ##########\n";
+
+      std::cout << "\nAll the available commands with all the available items:\n";
+
+      std::cout << "\nType in \"Move North/South/East/West\" in order to navigate the map."
+         << "\nType in \"Look Room/NPC/Inventory/Item\" in order to look around the map and at NPCs in a room."
+         << "\nType in \"Use Item\" in order to use an item."
+         << "\nType in \"Talk NPC\" in order to speak with an NPC if they're present."
+         << "\nType in \"Take Item\" in order to grab an item if available in a room."
+         << "\nType in \"Examine Item\" in order to grab an item if available.\n";
+
+      std::cout << "\nPlease input a command: ";
+      std::getline(std::cin, userInput);
+      DEBUG::echo(userInput);
+      std::cout << "Vallore: ";
+      double inGame_Update = GetCurrentTime();
+      parse(userInput, DEBUG_Player, currentRoom, Rooms);
+      double inGame_InputUpdate = GetCurrentTime();
+      std::cout << "\n" << std::endl;
+      DEBUG::updateTick_Display(inGame_Update, inGame_InputUpdate);
+      std::cout << "*DEBUG* " << "Current PLAYER location is: (" << DEBUG_Player.characterLocation.x
+         << ", " << DEBUG_Player.characterLocation.y << ")" << std::endl;
+      std::cout << "*DEBUG* " << "Current room: " << currentRoom.roomName
+         << "\n*DEBUG* Current Room description: " << currentRoom.roomLook << std::endl;
+   }
+   else if (!isDEBUG)
+   {
+
+   }
 }

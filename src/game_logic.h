@@ -7,6 +7,8 @@
 #include "debug.h"
 #include "ezstr.hpp"
 
+extern int GAME_STATE;
+
 const enum eMovement {NORTH, SOUTH, EAST, WEST};
 const enum eSchoolRooms {WizClass, NorthHall, EmptyClass, SouthHall, NurseOff, PrinceOff, Commons, Courtyard, PortalCrss, Pond1, Punisher, Pond2};
 const enum eGAME_STATES {FREE_ROAM, COMBAT, PUZZLE};
@@ -19,8 +21,6 @@ const int MAX_MAP_Y = 10;
 const int MAX_INV_AMT = 2;
 const int GAME_STATE_AMT = 3;
 const int NULL_VAL = -1;
-
-static int CURRENT_GAME_STATE = -1;
 
 // making a baby grid system
 struct vector2
@@ -101,3 +101,6 @@ void useCommand(room &currentLoc, room *Rooms, Player &player);
 void lookCommand(std::vector<std::string> &commandDir, room &currentLoc, Player &player);
 // give player item
 void giveItem(item& itemToGive, Player& player);
+
+// story-based functions
+void expo_intro();
