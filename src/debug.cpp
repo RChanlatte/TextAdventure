@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "debug.h"
 
 /*
@@ -7,7 +6,7 @@
 
 extern bool IS_DEBUG = true;
 extern char Generic_Err[51] = "\n\n***ERROR***\nSomething went wrong.\n***ERROR***\n\n\0";
-extern std::wstring gameVer = L"v0.2.0-a";
+extern std::wstring gameVer = L"v0.2.5-a";
 
 static double currentFrame = GetCurrentTime();
 
@@ -17,7 +16,7 @@ void DEBUG::debugTag()
 }
 void DEBUG::echo(std::string const &inputStr)
 {
-	std::cout << "\n*DEBUG* You input: " << inputStr << "\n";
+	std::cout << "*DEBUG* You input: " << inputStr << "\n" << std::endl;
 }
 void DEBUG::wecho(std::wstring const &inputStr)
 {
@@ -40,6 +39,6 @@ void DEBUG::updateTick_Display(double previousUpdate, double previousInput)
 		double inputElapsed = currentFrame - previousInput;
 		previousUpdate = currentFrame;
 		previousInput = currentFrame;
-		std::cout << "*DEBUG* " << updateElapsed << " miliseconds have elapsed since last update.\n*DEBUG* " << inputElapsed << " miliseconds since last input.\n" << std::endl;
+		std::cout << "*DEBUG* " << updateElapsed << " miliseconds have elapsed since last update.\n*DEBUG* " << inputElapsed << " miliseconds since last input." << std::endl;
 	}
 }

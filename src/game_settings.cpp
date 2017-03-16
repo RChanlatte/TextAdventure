@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "game_settings.h"
 #include "debug.h"
 

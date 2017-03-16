@@ -4,16 +4,23 @@
 #include <vector>
 #include <stdlib.h>
 
-#include "ezstr.h"
+#include "debug.h"
+#include "ezstr.hpp"
 
-const enum SchoolRooms { WizClass, NorthHall, EmptyClass, SouthHall, NurseOff, PrinceOff, Cafeteria, StockRm, Courtyard, DirtRd, Forest, Altar };
-const enum enNPCs { npc1, npc2, npc3 };
+const enum eMovement {NORTH, SOUTH, EAST, WEST};
+const enum eSchoolRooms {WizClass, NorthHall, EmptyClass, SouthHall, NurseOff, PrinceOff, Commons, Courtyard, PortalCrss, Pond1, Punisher, Pond2};
+const enum eGAME_STATES {FREE_ROAM, COMBAT, PUZZLE};
+const enum eNPCs {TicTac, Executioner};
 
-// a null variable that I'll check for when looking for a direction the player can go in.
-const int NULL_VAL = -1;
+const int MAX_MOVE_AMT = 4;
 const int MAX_ROOM_AMT = 12;
 const int MAX_MAP_X = 10;
 const int MAX_MAP_Y = 10;
+const int MAX_INV_AMT = 2;
+const int GAME_STATE_AMT = 3;
+const int NULL_VAL = -1;
+
+static int CURRENT_GAME_STATE = -1;
 
 // making a baby grid system
 struct vector2
@@ -38,7 +45,7 @@ struct CharacterBase
 
 struct Player : CharacterBase
 {
-	item playerInv[10];
+	item playerInv[MAX_INV_AMT];
 };
 
 struct NPC : CharacterBase
@@ -56,6 +63,7 @@ struct room
 	std::string roomName;
 	std::string roomLook;
 	std::string itemLook;
+   int canMove[MAX_MOVE_AMT] = {NORTH, SOUTH, EAST, WEST};
 	bool isLocked = false;
 	bool itemPresent = false;
 	bool useItem = false;
@@ -67,21 +75,29 @@ struct room
 inline bool operator==(const vector2& lhs, const vector2& rhs) { return lhs.x == rhs.x && lhs.y == rhs.y; }
 inline bool operator!=(const vector2& lhs, const vector2& rhs) { return !operator==(lhs, rhs); }
 
+// set the game state functions
+void FREE_ROAM_STATE(bool isDEBUG = false);
+void COMBAT_STATE(bool isDEBUG = false);
+void PUZZLE_STATE(bool isDEBUG = false);
+
 // set the rooms
 void set_Rooms(room Rooms[MAX_ROOM_AMT]);
 // sets the NPCs in the room. didn't want to crowd the room function too much
 void set_NPCs(room Rooms[MAX_ROOM_AMT], Player &player);
 // determine which room the player is moving too and if it's valid
-void moveRoom(std::vector<std::string> &command, room *roomsLst, Player &player, room &currentRoom);
+void moveCommand(std::vector<std::string> &command, room *roomsLst, Player &player, room &currentRoom);
 // read in input
 void parse(std::string& input, Player &player, room &currentRm, room *Rooms);
 // update player's position
-void update_playerPos(Player &player, room &currentRoom, room *Rooms);
+void update_playerPos(vector2 &playerLoc, room &currentRoom, room *Rooms);
+void moveOutput(room& room, bool canMove, bool isLocked);
 // talk to an NPC if present
-void talkNPC(std::vector<std::string> &commandDir, room &currentLoc);
+void talkCommand(std::vector<std::string> &commandDir, room &currentLoc);
 // pick up an item if available
-void takeItem(std::vector<std::string> &commandDir, room &currentLoc, Player &player);
+void takeCommand(std::vector<std::string> &commandDir, room &currentLoc, Player &player);
 // use item
-void useItem(room &currentLoc, room Rooms[MAX_ROOM_AMT], Player &player);
+void useCommand(room &currentLoc, room *Rooms, Player &player);
 // look around the room
 void lookCommand(std::vector<std::string> &commandDir, room &currentLoc, Player &player);
+// give player item
+void giveItem(item& itemToGive, Player& player);

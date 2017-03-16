@@ -1,167 +1,126 @@
-/*
-###
-###	Contributors:
-###
-###		Ryan Chanlatte
-###		Cameron Alexander (preemptively added because I love him)
-###
-*/
+#include "ezStr.hpp"
 
-#include "stdafx.h"
-
-// if you need to add additional headers for more functionality, please do so in the "ezstr.h" header first.
-#include "ezstr.h"
-
-// NOTE TO POTENTIAL CONTRIBUTORS:
-/*
-	If you're going to contribute here are some guidelines:
-	{
-		1.) Please make sure if you're using a string as an argument to a function and you're NOT modifying
-			it, please make it constant. It is good practice and it prevents Undefined Behavior (UB).
-
-		2.) Please use sensible variable and function names. Some of the names may seem verbose now, but I
-			wanted to err on the side of too detailed, rather than too vague.
-
-		3.) Comment everything.
-
-		4.) I don't want any line to be too long so I'm imposing a hard limit of 110 characters-per-line,
-			so try to adhere too it the best you can. Yes, spaces & tabs count, and yes exceptions can
-			and probably will be made, but let's keep it low.
-
-		5.) Try to stick to the current syntax and set-up, that is, stick to the style you currently see
-			so as to create some level of consistency & readability.
-
-			EXAMPLE: The void functions are first, followed by those that return values, starting with
-					 booleans, then integers, ect. It's wholly arbitrary, but make sure it remains
-					 consistent and clump similar functions together, primarily by return value.
-					 All voids together, all bools together, all ints together, ect.
-	}
-*/
-
-// convert a string's characters to upper-case
-void ezStr::strToUpper(std::string &inputStr)
+// changes the case of a string to upper-case
+void ezStr::ToUpper(std::string& inputStr)
 {
-	for (size_t charIndex = 0; charIndex < inputStr.length(); charIndex++)
+   // iterates over each character in a string
+   for (size_t charIndex = 0; charIndex < inputStr.length(); charIndex++)
 	{
-		if ( islower(inputStr[charIndex]) )
+      // if the character is lower-case, convert to upper-case; otherwise, keep going
+		if (islower(inputStr[charIndex]))
 		{
 			inputStr[charIndex] = toupper(inputStr[charIndex]);
 		}
 	}
 }
 
-// convert a string's characters to lower-case
-void ezStr::strToLower(std::string &inputStr)
+// changes the case of a string to lower-case
+void ezStr::ToLower(std::string& inputStr)
 {
+   // iterates over each character in a string
 	for (size_t charIndex = 0; charIndex < inputStr.length(); charIndex++)
 	{
-		if ( isupper(inputStr[charIndex]) )
+      // if the character is lower-case, convert to upper-case; otherwise, keep going
+		if (isupper(inputStr[charIndex]))
 		{
 			inputStr[charIndex] = tolower(inputStr[charIndex]);
 		}
 	}
 }
 
-// rmv must be a character pointer so it allows multiple characters via character arrays
-void ezStr::strCharRmv(std::string& inputStr, const char* rmv)
+// change the case of a string to capitalize each word
+void ezStr::Capitalize(std::string& inputStr)
 {
-	// iterates over the character array to check for each character in the string
-	for (size_t charIndex = 0; charIndex < strlen(rmv); ++charIndex)
-	{
-		// erase is what removes the characters, remove simply re-orders the string to bring the character
-		// currently seleted (rmv[charIndex]) to the front of the string. It's a bit unwieldy at first, but
-		// it ultimately makes sense
-		inputStr.erase(remove(inputStr.begin(), inputStr.end(), rmv[charIndex]), inputStr.end());
-	}
+   // uppercases first character
+   inputStr[0] = toupper(inputStr[0]);
+
+   // iterates over the characters in the string
+   for (size_t charIndex = 1; charIndex < inputStr.length(); charIndex++)
+   {
+      // if the last character was an alphabetical, ascii character, then convert to lower-case
+      if (isalpha(inputStr[charIndex - 1]))
+      {
+         inputStr[charIndex] = tolower(inputStr[charIndex]);
+      }
+      // if it isn't an alphabetical, ascii character, then convert to upper-case
+      else
+      {
+         inputStr[charIndex] = toupper(inputStr[charIndex]);
+      }
+   }
 }
 
-void ezStr::conSolidLine(int length)
+// replaces a single character in a string to some other, programmer defined, character
+void ezStr::ReplaceAll(char charToReplace, char charReplacement, std::string& inputStr)
 {
-	for (int i = 0; i < length; i++) { std::cout << "_"; };
+   // the usual replace function
+	std::replace(inputStr.begin(), inputStr.end(), charToReplace, charReplacement);
 }
 
-/*
-// converts int to Str, can optionally add commas for tuples
-std::string ezStr::intToStr(const int& integer, int mode, char delim)
+// remove a character or C-array of characters from a string
+void ezStr::RemoveChar(std::string& inputStr, char* removeChar_Array)
 {
-	std::string tempStr;
-	int tempInt = integer;
-
-	if (mode == 0)
-	{
-		return std::to_string(tempInt);
-	}
-	else if (mode == 1)
-	{
-		tempStr = std::to_string(tempInt);
-		
-		for (int i = 0; i < tempStr.length(); i++)
-		{
-			tempStr[i] += delim;
-		}
-	}
-	else if (mode == 2)
-	{
-		tempStr = std::to_string(tempInt);
-
-		for (int i = 0; i < tempStr.length(); i+2)
-		{
-			tempStr[i] += delim;
-		}
-	}
-
-	return tempStr;
-}
-*/
-
-// returns a boolean value depending on whether or not the two strings are equal
-bool ezStr::strCompare(const std::string &inputStr, const std::string &sourceStr)
-{
-	// if the input string is equal to the source string then return true, otherwise return false
-	return inputStr == sourceStr ? true : false;
+   // iterates over the string's characters
+   for (size_t charIndex = 0; charIndex < strlen(removeChar_Array); charIndex++)
+   {
+      // using the erase-remove idiom, we remove the characters then move onto the next character
+      inputStr.erase(remove(inputStr.begin(), inputStr.end(), removeChar_Array[charIndex]), inputStr.end());
+   }
 }
 
-// removes all characters that aren't ascii numerials and convert the resulting value to an integer
-int ezStr::strToInt(const std::string &inputStr)
+// remove a string from a string
+void ezStr::RemoveChar(std::string& inputStr, std::string removeChar_Str)
 {
-	std::string tempStr = inputStr;
-	int tempInt = 0;
-	char alphabet[] = { "abcdefghijklmnopqrstuvwxyz,.;'/ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
-
-	ezStr::strCharRmv(tempStr, alphabet);
-	tempInt = std::stoi(tempStr, nullptr, 10);
-
-	return tempInt;
+   // iterates over the string's characters
+   for (size_t charIndex = 0; charIndex < removeChar_Str.length(); charIndex++)
+   {
+      // using the erase-remove idiom, we remove the string from the input string 
+      inputStr.erase(remove(inputStr.begin(), inputStr.end(), removeChar_Str[charIndex]), inputStr.end());
+   }
 }
 
-// separates a string based on a single character delimiter into smaller components.
-std::vector<std::string> ezStr::strDelim(const std::string& inputStr, const char& delim)
+// remove a vector of characters from a string
+void ezStr::RemoveChar(std::string& inputStr, std::vector<char> removeChar_Vec)
+{
+   // iterates over the string's characters
+   for (size_t charIndex = 0; charIndex < removeChar_Vec.size(); charIndex++)
+   {
+      // using the erase-remove idiom, we remove the characters, then increment the vector
+      inputStr.erase(remove(inputStr.begin(), inputStr.end(), removeChar_Vec[charIndex]), inputStr.end());
+   }
+}
+
+// check to see if two strings are equivalent
+bool ezStr::Compare(const std::string& firstString, const std::string& secondString)
+{
+   // returns either true or false, depending on equivalency
+	return firstString == secondString ? true : false;
+}
+
+// takes a string and a single-character delimiter, and tokenizing it into a vector
+std::vector <std::string> ezStr::ToVector(const std::string& inputStr, const char& delim)
 {
 	std::vector<std::string> tempVec;
-	std::string subStr;
+	std::string tempSubStr;
 
-	// simply iterates over string to add each character to a sub-string, which is then pushed back
-	// into a vector for use later
+   // iterates over the input string's characters
 	for (size_t charIndex = 0; charIndex < inputStr.length(); charIndex++)
 	{
-		if (inputStr[charIndex] != delim && inputStr[charIndex] != '\0')
+      // if the current character is NOT the programmer-defined delimiter, append to our SubString
+		if (inputStr[charIndex] != delim)
 		{
-			// appending to sub-string the inputStr's characters
-			subStr += inputStr[charIndex];
+			tempSubStr += inputStr[charIndex];
 		}
+      // if the current character IS the programmer-defined delimiter, push_back to our vector
 		else if (inputStr[charIndex] == delim)
 		{
-			// if we hit the input character delimiter, then we'll push back the sub-string
-			// into the vector. I clear the sub-string so nothing from the previous iteration
-			// interferes with the new one.
-			tempVec.push_back(subStr);
-			subStr.clear();
+			tempVec.push_back(tempSubStr);
+         // clear the substring so nothing from the previous element is accidentally added
+			tempSubStr.clear();
 		}
 	}
 
-	// the conditional gets out without committing the last word that is delimited. Not sure why that is
-	// trying to figure it out now. Thus far, this is a band-aid fix.
-	tempVec.push_back(subStr);
-
+   // push_back residual strings
+	tempVec.push_back(tempSubStr);
 	return tempVec;
 }
