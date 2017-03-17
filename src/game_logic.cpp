@@ -3,6 +3,9 @@
 /* TODO: Create a function in ezSTR that takes a string and an integer value for the buffer of a
          console window so it can input newlines dynamically. */
 
+bool NUM_PUZZ_CMPT = false;
+bool HANG_PUZZ_CMPT = false;
+
 void expo_intro()
 {
    std::cout << "\nDaydreaming you wake up, the teacher, a Wizard, kicks you out of the classroom" 
@@ -563,21 +566,109 @@ void parse(std::string &input, Player &player, room &currentRm, room *Rooms)
 
 }
 
+void puzzle_NUM()
+{
+   int numAns = 14;
+   int response;
+
+   std::cout << "Asgoth: \"Alright! The objective is to guess the number! My superior 14 year-old "
+               << "intellect, makes you no match! HA! You'll have THREE TRIES, before this cool "
+               << "teen beats it outta yeah! ";
+
+   for (int i = 0; i < 3; i++)
+   {
+      if (i == 0)
+      {
+         std::cout << "Nya-ha! First try! Let's see if you can outsmart this 14 years young "
+                  << "barbarian master! Haha!\"\n" << std::endl;
+         std::cout << "\nYour guess:\t";
+         std::cin >> response;
+      }
+      else if (i == 1 && response != numAns)
+      {
+         std::cout << "Asgoth: \"Ha-ha! Second try! Am I getting in your head bro?! You need to brush "
+                  << "up on your guessing skills! I knew your primitive baby mind couldn't match my "
+                  << "own!\"\n" << std::endl;
+         std::cout << "\nYour guess:\t";
+         std::cin >> response;
+      }
+      else if (i == 2 && response != numAns)
+      {
+         std::cout << "Asgoth: \"Ho-ho! Third try! This is pathetic! Why don't you summon some skeletons "
+            << "to help you out?! Ahaha! You need to git gud in order to face THIS bombacious teen!\""
+            << "\n" << std::endl;
+         std::cout << "\nYour guess:\t";
+         std::cin >> response;
+      }
+      if (response == numAns)
+      {
+         switch (i)
+         {
+         case 0:
+            i = 2;
+            std::cout << "Asgoth: \"W-what?! H-how...?! CHEATER! There is no way! Prepare to feel the "
+                  << "wrath of this teenage fury!!!\"\n" << std::endl;
+            NUM_PUZZ_CMPT = true;
+            break;
+         case 1:
+            i = 2;
+            std::cout << "Asgoth: \"N-No way! What in the...?! FRAUD! You must've cheated! Prepare "
+                  << "yourself necromancer!\"\n" << std::endl;
+            NUM_PUZZ_CMPT = true;
+            break;
+         case 2:
+            std::cout << "Asgoth: \"You almost l-lost...?! No... This isn't possible! You had to have "
+                  << " cheated! I will not allow this! Fight!\"\n" << std::endl;
+            NUM_PUZZ_CMPT = true;
+            break;
+         default:
+            std::cout << "Asgoth: \"Ha-ha! Of course you couldn't succeed! Your tiny, necromancer mind "
+                  << "just couldn't grasp such a simple game! Now, get read for the beat-down, necro!\"\n" << std::endl;
+            NUM_PUZZ_CMPT = true;
+            break;
+         }
+      }
+   }
+   GAME_STATE = COMBAT;
+}
+
+void puzzle_HANG()
+{
+
+}
+
 void PUZZLE_STATE(bool isDEBUG)
 {
    std::string input;
    std::vector<std::string> commands;
 
-   std::cout << "#####\n\nPUZZLE STATE\n\n#####\n" << std::endl;
-
-   std::getline(std::cin, input);
-   ezStr::ToLower(input);
-   commands = ezStr::ToVector(input);
-
-   if (commands[0] == "move" && commands[1] == "state")
+   if (IS_DEBUG)
    {
-      GAME_STATE = FREE_ROAM;
+      std::cout << "#####\n\nPUZZLE STATE\n\n#####\n" << std::endl;
+
+      std::getline(std::cin, input);
+      ezStr::ToLower(input);
+      commands = ezStr::ToVector(input);
+
+      if (commands[0] == "move" && commands[1] == "state")
+      {
+         GAME_STATE = FREE_ROAM;
+      }
+      else if (commands[0] == "start" && commands[1] == "guess")
+      {
+         puzzle_NUM();
+      }
+      else if (commands[0] == "start" && commands[1] == "hang")
+      {
+         puzzle_HANG();
+      }
    }
+   else
+   {
+
+   }
+   
+                        
 }
 
 void COMBAT_STATE(bool isDEBUG)

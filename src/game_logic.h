@@ -8,6 +8,8 @@
 #include "ezstr.hpp"
 
 extern int GAME_STATE;
+extern bool NUM_PUZZ_CMPT;
+extern bool HANG_PUZZ_CMPT;
 
 const enum eMovement {NORTH, SOUTH, EAST, WEST};
 const enum eSchoolRooms {WizClass, NorthHall, EmptyClass, SouthHall, NurseOff, PrinceOff, Commons, Courtyard, PortalCrss, Pond1, Punisher, Pond2};
@@ -79,6 +81,8 @@ inline bool operator!=(const vector2& lhs, const vector2& rhs) { return !operato
 void FREE_ROAM_STATE(bool isDEBUG = false);
 void COMBAT_STATE(bool isDEBUG = false);
 void PUZZLE_STATE(bool isDEBUG = false);
+void puzzle_NUM();
+void puzzle_HANG();
 
 // set the rooms
 void set_Rooms(room Rooms[MAX_ROOM_AMT]);
