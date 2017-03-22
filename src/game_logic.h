@@ -86,8 +86,6 @@ void puzzle_HANG();
 
 // set the rooms
 void set_Rooms(room Rooms[MAX_ROOM_AMT]);
-// sets the NPCs in the room. didn't want to crowd the room function too much
-void set_NPCs(room Rooms[MAX_ROOM_AMT], Player &player);
 // determine which room the player is moving too and if it's valid
 void moveCommand(std::vector<std::string> &command, room *roomsLst, Player &player, room &currentRoom);
 // read in input

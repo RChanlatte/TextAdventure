@@ -6,12 +6,6 @@
 bool NUM_PUZZ_CMPT = false;
 bool HANG_PUZZ_CMPT = false;
 
-void expo_intro()
-{
-   std::cout << "\nDaydreaming you wake up, the teacher, a Wizard, kicks you out of the classroom" 
-            << "\nover your apathy towards your studies. Go to the principal's office.\n\n" << std::endl;
-}
-
 void update_playerPos(vector2 &playerLoc, room &currentRoom, room *Rooms)
 {
 	for (int i = 0; i < MAX_ROOM_AMT; i++)
@@ -78,6 +72,12 @@ void giveItem(item& itemToGive, Player& player)
       }
       
    }
+}
+
+void expo_intro()
+{
+   std::cout << "\nDaydreaming you wake up, the teacher, a Wizard, kicks you out of the classroom"
+      << "\nover your apathy towards your studies. Go to the principal's office.\n\n" << std::endl;
 }
 
 /*
@@ -381,12 +381,6 @@ void moveCommand(std::vector<std::string> &commandDir, room *roomsLst, Player &p
    }
 }
 
-// TODO: flesh out npc dialogue
-void set_NPCs(room Rooms[MAX_ROOM_AMT], Player &player)
-{
-	
-}
-
 void lookCommand(std::vector<std::string> &commandDir, room &currentLoc, Player &player) 
 {
 	if (commandDir[1] == "ROOM")
@@ -632,9 +626,304 @@ void puzzle_NUM()
    GAME_STATE = COMBAT;
 }
 
+void update_gameBoard(int& tries)
+{
+   // roof of gallows
+   for (int i = 0; i < 9; i++)
+   {
+      std::cout << "#";
+   }
+
+   switch (tries)
+   {
+   case 0:
+      for (int i = 0; i < 8; i++)
+      {
+         if (i == 0)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i == 1)
+         {
+            std::cout << "\n@\tO";
+         }
+         else if (i == 2)
+         {
+            std::cout << "\n@      /|\\";
+         }
+         else if (i == 3)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i == 4)
+         {
+            std::cout << "\n@\t^";
+         }
+         else if (i >= 5 && i < 7)
+         {
+
+            std::cout << "\n@";
+         }
+         else
+         {
+            std::cout << "\n@\n";
+         }
+      }
+      break;
+   case 1:
+      for (int i = 0; i < 8; i++)
+      {
+         if (i == 0)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i == 1)
+         {
+            std::cout << "\n@\tO";
+         }
+         else if (i == 2)
+         {
+            std::cout << "\n@      /|\\";
+         }
+         else if (i == 3)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i >= 4 && i < 7)
+         {
+
+            std::cout << "\n@";
+         }
+         else
+         {
+            std::cout << "\n@\n";
+         }
+      }
+      break;
+   case 2:
+      for (int i = 0; i < 8; i++)
+      {
+         if (i == 0)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i == 1)
+         {
+            std::cout << "\n@\tO";
+         }
+         else if (i == 2)
+         {
+            std::cout << "\n@      /|";
+         }
+         else if (i == 3)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i >= 4 && i < 7)
+         {
+
+            std::cout << "\n@";
+         }
+         else
+         {
+            std::cout << "\n@\n";
+         }
+      }
+      break;
+   case 3:
+      for (int i = 0; i < 8; i++)
+      {
+         if (i == 0)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i == 1)
+         {
+            std::cout << "\n@\tO";
+         }
+         else if (i == 2)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i == 3)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i >= 4 && i < 7)
+         {
+
+            std::cout << "\n@";
+         }
+         else
+         {
+            std::cout << "\n@\n";
+         }
+      }
+      break;
+   case 4:
+      for (int i = 0; i < 8; i++)
+      {
+         if (i == 0)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i == 1)
+         {
+            std::cout << "\n@\tO";
+         }
+         else if (i == 2)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i >= 3 && i < 7)
+         {
+
+            std::cout << "\n@";
+         }
+         else
+         {
+            std::cout << "\n@\n";
+         }
+      }
+      break;
+   case 5:
+      for (int i = 0; i < 8; i++)
+      {
+         if (i == 0)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i == 1)
+         {
+            std::cout << "\n@\tO";
+         }
+         else if (i >= 2 && i < 7)
+         {
+
+            std::cout << "\n@";
+         }
+         else
+         {
+            std::cout << "\n@\n";
+         }
+      }
+      break;
+   default:
+      for (int i = 0; i < 8; i++)
+      {
+         if (i == 0)
+         {
+            std::cout << "\n@\t|";
+         }
+         else if (i <= 6)
+         {
+
+            std::cout << "\n@";
+         }
+         else
+         {
+            std::cout << "\n@\n";
+         }
+      }
+      break;
+   }
+
+   // floor of gallows
+   for (int i = 0; i < 15; i++)
+   {
+      std::cout << "#";
+   }
+
+   std::cout << "\n" << std::endl;
+}
+
 void puzzle_HANG()
 {
+   std::string inputStr, bufferStr;
+   std::string word_to_guess = "TEST STRING";
+   bufferStr = word_to_guess;
+   int TRIES = 6;
+   bool GAME_WON = false;
 
+   // initializes the buffer string
+   for (size_t i = 0; i < word_to_guess.length(); i++)
+   {
+      if (bufferStr[i] != ' ')
+      {
+         bufferStr[i] = '-';
+         continue;
+      }
+      else
+      {
+         bufferStr[i] = ' ';
+         continue;
+      }
+   }
+
+   while (TRIES > 0)
+   {
+      size_t count = 0;
+      bool notFound = true;
+
+      // initialize execuitioner's gallows
+      update_gameBoard(TRIES);
+
+      // displays the buffer string each iteration and checks if it is completely dashes
+      for (size_t i = 0; i < word_to_guess.length(); i++)
+      {
+         std::cout << bufferStr[i];
+
+         if (bufferStr[i] != '-')
+         {
+            count++;
+            continue;
+         }
+         else if (count >= (word_to_guess.length() - 1))
+         {
+            GAME_WON = true;
+         }
+      }
+
+      // accepts input
+      std::cout << "\n\nInput a letter before you hang the man!\n\nYou currently have " << TRIES << " tries left.\n\n" << "Letter: ";
+      std::cin >> inputStr;
+      ezStr::ToUpper(inputStr);
+
+      // checks against the word to guess and edits the buffer accordingly
+      for (size_t i = 0; i < word_to_guess.length(); i++)
+      {
+         if (inputStr[0] == word_to_guess[i])
+         {
+            bufferStr[i] = inputStr[0];
+            notFound = false;
+            continue;
+         }
+      }
+      if (notFound)
+      {
+         std::cout << "\n\nUh-oh! Looks like you missed a letter!\n" << std::endl;
+         --TRIES;
+      }
+      else if (GAME_WON)
+      {
+         break;
+      }
+   }
+
+   if (GAME_WON)
+   {
+      update_gameBoard(TRIES);
+      std::cout << "\nTHE ANSWER WAS:\t" << bufferStr;
+      std::cout << "\n$$$$$YOU WON!!!$$$$$\n\n";
+   }
+   else
+   {
+      update_gameBoard(TRIES);
+      std::cout << "\nTHE ANSWER WAS:\t" << bufferStr;
+      std::cout << "\n######YOU LOST!!!#####\n\n";
+   }
+
+   system("PAUSE");
 }
 
 void PUZZLE_STATE(bool isDEBUG)
@@ -705,7 +994,6 @@ void FREE_ROAM_STATE(bool isDEBUG)
       DEBUG_Player.characterName = "**DEBUG_Player";
       DEBUG_Player.characterLocation = startLoc;
       update_playerPos(DEBUG_Player.characterLocation, currentRoom, Rooms);
-      set_NPCs(Rooms, DEBUG_Player);
       giveItem(itemList[0], DEBUG_Player);
 
       std::wcout << "########### DEBUGGING BUILD: " << gameVer << ", IS ACTIVE ##########\n";
