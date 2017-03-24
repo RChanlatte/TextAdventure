@@ -8,37 +8,84 @@
 	This file is primarily for secondary things that involve windows like the windows size.
 */
 
+short CONSOLE_WIDTH = 0;
+short CONSOLE_HEIGHT = 0;
+short CONSOLE_BUFFER_WIDTH = CONSOLE_WIDTH;
+short CONSOLE_BUFFER_HEIGHT = (CONSOLE_HEIGHT * 2);
+
 char const configFileName[12] = { "config.txt\0" };
+
+inline bool file_exist(const char* filename)
+{
+   std::ifstream infile(configFileName);
+   return infile.good();
+}
+
+inline std::string file_toStr(const char* fileName)
+{
+   std::ifstream fileStream(fileName);
+   std::string fileContents;
+   // iterators have to be in parenthesis. It's a c++ compiler parsing problem
+   fileContents.assign((std::istreambuf_iterator<char>(fileStream)),
+      (std::istreambuf_iterator<char>()));
+   return fileContents;
+}
 
 // TODO: Make it so that you can adjust the size of the console
 //		 window inside the config file. Some of the work is done.
-void make_config()
+inline void make_config()
 {
 	std::fstream configFileObj;
+   std::string fileContent;
+   char delim;
+   int conWidth, conHeight;
 
-	std::cout << "Do you want to adjust the size of the console window? (Yes/No) No defaults to an arbitrary value.";
+   if (file_exist(configFileName))
+   {
+      configFileObj.open(configFileName, std::ios::in);
 
-	configFileObj.open(configFileName, std::ios::out);
+      if (configFileObj.is_open())
+      {
+         fileContent = file_toStr(configFileName);
+      }
+      else if (!configFileObj.is_open())
+      {
+         std::cout << "\n\n***Error***\nConfig file could not be opened.\n***ERROR***\n\n";
+      }
+      else
+      {
+         std::cout << Generic_Err;
+      }
+   }
+   else
+   {
+      std::cout << "Do you want to adjust the size of the console window? (Yes/No) No defaults to an arbitrary value.\n" << std::endl;
 
-	if (configFileObj.is_open())
-	{
-		// sets the widthxheight of the window
-		configFileObj << "150x300";
-		configFileObj.close();
-	}
-	else if (!configFileObj.is_open())
-	{
-		std::cout << "\n\n***Error***\nConfig file could not be opened.\n***ERROR***\n\n";
-		configFileObj.close();
-	}
-	else
-	{
-		std::cout << Generic_Err;
-		configFileObj.close();
-	}
+      configFileObj.open(configFileName, std::ios::out);
+
+      if (configFileObj.is_open())
+      {
+         // sets the widthxheight of the window
+         configFileObj << "150x300";
+         configFileObj.close();
+      }
+      else if (!configFileObj.is_open())
+      {
+         std::cout << "\n\n***Error***\nConfig file could not be opened.\n***ERROR***\n\n";
+         configFileObj.close();
+      }
+      else
+      {
+         std::cout << Generic_Err;
+         configFileObj.close();
+      }
+
+      CONSOLE_WIDTH = 150;
+      CONSOLE_HEIGHT = 300;
+   }
 }
 
-void set_Settings()
+extern inline void set_Settings()
 {
 	std::wstring dgTitle = L"DEBUG - Text Adventure " + gameVer;
 	std::wstring reTitle = L"Text Adventure " + gameVer;
@@ -52,16 +99,12 @@ void set_Settings()
 	DEBUG::wecho(dgTitle);
 	DEBUG::wecho(reTitle);
 
-	// checks if config file exists, if it doesn't, make it
-	if (!std::ifstream(configFileName))
-	{
-		make_config();
-	}
+   make_config();
 
 	writeHnd = GetStdHandle(STD_OUTPUT_HANDLE);
 	readHnd = GetStdHandle(STD_INPUT_HANDLE);
-	windowSize = { 0,0,150,300 };
-	bufferSize = { 150,300 };
+	windowSize = { 0,0, CONSOLE_WIDTH, CONSOLE_HEIGHT };
+	bufferSize = { CONSOLE_BUFFER_WIDTH, CONSOLE_BUFFER_HEIGHT};
 
 	// Change the window's title:
 	if (IS_DEBUG == true)

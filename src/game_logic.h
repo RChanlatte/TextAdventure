@@ -13,8 +13,9 @@ extern bool HANG_PUZZ_CMPT;
 
 const enum eMovement {NORTH, SOUTH, EAST, WEST};
 const enum eSchoolRooms {WizClass, NorthHall, EmptyClass, SouthHall, NurseOff, PrinceOff, Commons, Courtyard, PortalCrss, Pond1, Punisher, Pond2};
-const enum eGAME_STATES {FREE_ROAM, COMBAT, PUZZLE};
+const enum eGAME_STATES {FREE_ROAM, PUZZLE};
 const enum eNPCs {TicTac, Executioner};
+const enum story_Milestones {INTRO, BULLY_PUZZLE, PUNISH, EXE_HANGMAN, REDEMPTION, BULLY_END, END_GAME};
 
 const int MAX_MOVE_AMT = 4;
 const int MAX_ROOM_AMT = 12;
@@ -79,7 +80,6 @@ inline bool operator!=(const vector2& lhs, const vector2& rhs) { return !operato
 
 // set the game state functions
 void FREE_ROAM_STATE(bool isDEBUG = false);
-void COMBAT_STATE(bool isDEBUG = false);
 void PUZZLE_STATE(bool isDEBUG = false);
 void puzzle_NUM();
 void puzzle_HANG();
@@ -105,4 +105,4 @@ void lookCommand(std::vector<std::string> &commandDir, room &currentLoc, Player 
 void giveItem(item& itemToGive, Player& player);
 
 // story-based functions
-void expo_intro();
+void expo_story(int milestone);

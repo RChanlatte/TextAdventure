@@ -74,10 +74,61 @@ void giveItem(item& itemToGive, Player& player)
    }
 }
 
-void expo_intro()
+void expo_story(int milestone)
 {
-   std::cout << "\nDaydreaming you wake up, the teacher, a Wizard, kicks you out of the classroom"
-      << "\nover your apathy towards your studies. Go to the principal's office.\n\n" << std::endl;
+   std::string exposition;
+
+   switch (milestone)
+   {
+      case INTRO:
+         exposition = "It's the last day of school at Gammorah Intermediate Prep. Our story centers"
+                     " around the adventures of a thirteen year-old, socially awkward necromancer"
+                     " named \"Valorre\". Valorre is currently daydreaming in his Wizard's class."
+                     " His morning hallucinations are, to the say the least, unusual. Inundated by"
+                     " images of salacious skeletons occupy his view, whispering unspeakables into"
+                     " his young ear. Valorre's breath quickens, unsure of himself, and hopelessly"
+                     " confused. \"Can skeletons even...?!\" Valorre sneakily utters under his"
+                     " breath. As Valorre grows increasingly uncomfortable with his confounding"
+                     " circumstances and apathetic libdo, he reaches for-- *WHAM*! A loud thud"
+                     " rattles Valorre's, now steamy, insides. Startled, Valorre leapt from his"
+                     " desk and looks around anxiously and prepared. There were audible laughs"
+                     " amongst his peers around him. Regardless, alert and ready, what Valorre would"
+                     " do if faced with"
+                     " imminent danger, he knows not, but he thinks himself ready. The Wizard at"
+                     " the front of the room sized up Valorre, looked visibly distressed and bellowed"
+                     " \"Wizard: I-uhh. You belong not here if you, uhh, can't even remain attentive!"
+                     " Out you go! Get out!\" The Wizard pushes Valorre, by his back, out of the"
+                     " classroom. A bit dazzed from his recent awakening, Valorre dusts off his"
+                     " robe, and-- \"Oh, my g-god...\" Valorre looks to a conspicuous and salacious"
+                     " tent pitched under his lower-robe. Valorre is at a loss for words. \"Guess I"
+                     " ought to go home... I'd g-go, uhh, South, I guess.\"";
+         break;
+      case BULLY_PUZZLE:
+         exposition = "BULLY_PUZZLE";
+         break;
+      case PUNISH:
+         exposition = "PUNISH";
+         break;
+      case EXE_HANGMAN:
+         exposition = "EXECUTIONER HANGMAN";
+         break;
+      case REDEMPTION:
+         exposition = "REDEMPTION";
+         break;
+      case BULLY_END:
+         exposition = "BULLY_END";
+         break;
+      case END_GAME:
+         exposition = "END OF THE GAME";
+         break;
+      default:
+         exposition = "\n###INVALID STORY MILESTONE.###\n";
+         break;
+   }
+
+   exposition = ezStr::ConsoleBuffer_Newline(exposition, 150);
+   std::cout << "\n" << exposition << "\n" << std::endl;
+   getchar();
 }
 
 /*
@@ -219,12 +270,7 @@ void moveCommand(std::vector<std::string> &commandDir, room *roomsLst, Player &p
    {
       if (GAME_STATE == FREE_ROAM)
       {
-         GAME_STATE = COMBAT;
-         std::cout << "\n\nGAME_STATE IS NOW " << "COMBAT" << "\n\n" << std::endl;
-      }
-      else if (GAME_STATE == COMBAT)
-      {
-         (GAME_STATE == PUZZLE);
+         GAME_STATE = PUZZLE;
          std::cout << "\n\nGAME_STATE IS NOW " << "PUZZLE" << "\n\n" << std::endl;
       }
       else if(GAME_STATE == PUZZLE)
@@ -623,7 +669,6 @@ void puzzle_NUM()
          }
       }
    }
-   GAME_STATE = COMBAT;
 }
 
 void update_gameBoard(int& tries)
@@ -958,23 +1003,6 @@ void PUZZLE_STATE(bool isDEBUG)
    }
    
                         
-}
-
-void COMBAT_STATE(bool isDEBUG)
-{
-   std::string input;
-   std::vector<std::string> commands;
-
-   std::cout << "#####\n\nCOMBAT STATE\n\n#####\n" << std::endl;
-
-   std::getline(std::cin, input);
-   ezStr::ToLower(input);
-   commands = ezStr::ToVector(input);
-
-   if (commands[0] == "move" && commands[1] == "state")
-   {
-      GAME_STATE = PUZZLE;
-   }
 }
 
 void FREE_ROAM_STATE(bool isDEBUG)

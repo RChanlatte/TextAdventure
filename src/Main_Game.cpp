@@ -13,7 +13,7 @@ int main()
 {
 	set_Settings();
    bool GAME_ACTIVE = TRUE;
-   expo_intro();
+   expo_story(INTRO);
 
    // a rudimentary game loop for our purposes
 	while (GAME_ACTIVE)
@@ -21,10 +21,6 @@ int main()
       if (GAME_STATE == FREE_ROAM)
       {
          FREE_ROAM_STATE(IS_DEBUG);
-      }
-      else if (GAME_STATE == COMBAT)
-      {
-         COMBAT_STATE(IS_DEBUG);
       }
       else if (GAME_STATE == PUZZLE)
       {
