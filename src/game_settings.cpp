@@ -46,6 +46,7 @@ inline void make_config()
 
       if (configFileObj.is_open())
       {
+         // puts contents of file into string
          fileContent = file_toStr(configFileName);
       }
       else if (!configFileObj.is_open())
