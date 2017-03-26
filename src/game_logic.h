@@ -6,6 +6,7 @@
 
 #include "debug.h"
 #include "ezstr.hpp"
+#include "game_settings.h"
 
 extern int GAME_STATE;
 extern bool NUM_PUZZ_CMPT;

@@ -1,8 +1,5 @@
 #include "game_logic.h"
 
-/* TODO: Create a function in ezSTR that takes a string and an integer value for the buffer of a
-         console window so it can input newlines dynamically. */
-
 bool NUM_PUZZ_CMPT = false;
 bool HANG_PUZZ_CMPT = false;
 
@@ -126,7 +123,7 @@ void expo_story(int milestone)
          break;
    }
 
-   exposition = ezStr::ConsoleBuffer_Newline(exposition, 150);
+   exposition = ezStr::ConsoleBuffer_Newline(exposition, CONSOLE_BUFFER_WIDTH);
    std::cout << "\n" << exposition << "\n" << std::endl;
    getchar();
 }
@@ -671,7 +668,7 @@ void puzzle_NUM()
    }
 }
 
-void update_gameBoard(int& tries)
+void update_gameBoard(const int& tries)
 {
    // roof of gallows
    for (int i = 0; i < 9; i++)

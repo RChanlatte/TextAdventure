@@ -10,8 +10,8 @@
 
 short CONSOLE_WIDTH = 0;
 short CONSOLE_HEIGHT = 0;
-short CONSOLE_BUFFER_WIDTH = CONSOLE_WIDTH;
-short CONSOLE_BUFFER_HEIGHT = (CONSOLE_HEIGHT * 2);
+extern short CONSOLE_BUFFER_WIDTH = 0;
+extern short CONSOLE_BUFFER_HEIGHT = 0;
 
 char const configFileName[12] = { "config.txt\0" };
 
@@ -48,6 +48,11 @@ inline void make_config()
       {
          // puts contents of file into string
          fileContent = file_toStr(configFileName);
+         std::vector<std::string> tempVec = ezStr::ToVector(fileContent, 'x');
+         CONSOLE_WIDTH = stoi(tempVec[0]);
+         CONSOLE_HEIGHT = stoi(tempVec[1]);
+         CONSOLE_BUFFER_WIDTH = CONSOLE_WIDTH;
+         CONSOLE_BUFFER_HEIGHT = (CONSOLE_HEIGHT * 2);
       }
       else if (!configFileObj.is_open())
       {
@@ -83,6 +88,8 @@ inline void make_config()
 
       CONSOLE_WIDTH = 150;
       CONSOLE_HEIGHT = 300;
+      CONSOLE_BUFFER_WIDTH = CONSOLE_WIDTH;
+      CONSOLE_BUFFER_HEIGHT = (CONSOLE_HEIGHT * 2);
    }
 }
 
