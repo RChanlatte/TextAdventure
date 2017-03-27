@@ -12,8 +12,7 @@ short CONSOLE_WIDTH = 0;
 short CONSOLE_HEIGHT = 0;
 extern short CONSOLE_BUFFER_WIDTH = 0;
 extern short CONSOLE_BUFFER_HEIGHT = 0;
-
-char const configFileName[12] = { "config.txt\0" };
+const char configFileName[12] = { "config.txt\0" };
 
 inline bool file_exist(const char* filename)
 {
@@ -57,40 +56,75 @@ inline void make_config()
    }
    else
    {
-      while (true)
+      bool fileSetup = true;
+
+      while (fileSetup)
       {
          std::cout << "Do you want to adjust the size of the console window? ([Y]es/[N]o) No defaults to"
             " an arbitrary value.\n\nInput:\t";
 
          std::getline(std::cin, input);
-         ezStr::To_Lower(input);
-         ezStr::Remove_Char(input, ezStr::NUMBERS_10);
-         ezStr::Remove_Char(input, ezStr::PUNCTUATION);
+         ezStr::Cleanse_Alpha(input, 'l');
          if (input == "yes" || input == "y")
          {
-            std::cout << "\nPut in as \"widthxheight\".\n\nInput:\t";
             input.clear();
+            std::cout << "\nPut in as \"widthxheight\".\n\nInput:\t";
             std::getline(std::cin, input);
-         }
-         else if (input == "no" || input == "n")
-         {
+            ezStr::Remove_Chars(input, ezStr::PUNCTUATION);
+            ezStr::Strip_Whitespace(input);
+            
             configFileObj.open(configFileName, std::ios::out);
+            if(configFileObj.is_open())
+            {
+               std::cout << "File is being created.";
+               Sleep(1000);
+               std::cout << ".";
+               Sleep(1000);
+               std::cout << ".";
+               Sleep(1000);
+               std::cout << "!" << std::endl;
+               configFileObj << input;
+               configFileObj.close();
+               Sleep(500);
+               std::cout << "\"config.txt\" has been created!\n" << std::endl;
 
-            if (configFileObj.is_open())
-            {
-               // sets the widthxheight of the window
-               configFileObj << "150x300";
-               configFileObj.close();
-            }
-            else if (!configFileObj.is_open())
-            {
-               std::cout << "\n\n***Error***\nConfig file could not be opened.\n***ERROR***\n\n";
-               configFileObj.close();
+               std::vector<std::string> tempVec = ezStr::To_Vector(input, 'x');
+               CONSOLE_WIDTH = (INT16)stoi(tempVec[0]);
+               CONSOLE_HEIGHT = (INT16)stoi(tempVec[1]);
+               CONSOLE_BUFFER_WIDTH = CONSOLE_WIDTH;
+               CONSOLE_BUFFER_HEIGHT = (CONSOLE_HEIGHT * 2);
+
+               fileSetup = false;
             }
             else
             {
-               std::cout << Generic_Err;
+               std::cout << "\n\n***Error***\nConfig file could not be created!\n***ERROR***\n\n";
+            }
+         }
+         else if (input == "no" || input == "n")
+         {
+            input.clear();
+
+            configFileObj.open(configFileName, std::ios::out);
+            if (configFileObj.is_open())
+            {
+               std::cout << "File is being created.";
+               Sleep(1000);
+               std::cout << ".";
+               Sleep(1000);
+               std::cout << ".";
+               Sleep(1000);
+               std::cout << "!" << std::endl;
+               // sets the widthxheight of the window
+               configFileObj << "150x300";
                configFileObj.close();
+               Sleep(500);
+               std::cout << "\"config.txt\" has been created!\n" << std::endl;
+               fileSetup = false;
+            }
+            else
+            {
+               std::cout << "\n\n***Error***\nConfig file could not be created!\n***ERROR***\n\n";
             }
 
             CONSOLE_WIDTH = 150;

@@ -563,10 +563,8 @@ void useCommand(room &currentLoc, room *Rooms, Player &player)
 void parse(std::string &input, Player &player, room &currentRm, room *Rooms)
 {
 	std::vector<std::string> commandVec;
-	char illegalChars[41] = "0123456789`~!@#$%^&*()-_=+[]{}|;\'\",.<>?/";
 
-	ezStr::Remove_Char(input, illegalChars);
-	ezStr::To_Upper(input);
+   ezStr::Cleanse_Alpha(input, 'u');
 	commandVec = ezStr::To_Vector(input);
 
 	if (commandVec.size() > 0 && commandVec.size() < 3)
@@ -937,7 +935,7 @@ void puzzle_HANG()
       // accepts input
       std::cout << "\n\nInput a letter before you hang the man!\n\nYou currently have " << TRIES << " tries left.\n\n" << "Letter: ";
       std::cin >> inputStr;
-      ezStr::To_Upper(inputStr);
+      ezStr::Cleanse_Alpha(inputStr, 'u');
 
       // checks against the word to guess and edits the buffer accordingly
       for (size_t i = 0; i < word_to_guess.length(); i++)
@@ -986,7 +984,7 @@ void PUZZLE_STATE(bool isDEBUG)
       std::cout << "#####\n\nPUZZLE STATE\n\n#####\n" << std::endl;
 
       std::getline(std::cin, input);
-      ezStr::To_Lower(input);
+      ezStr::Cleanse_Alpha(input, 'l');
       commands = ezStr::To_Vector(input);
 
       if (commands[0] == "move" && commands[1] == "state")
