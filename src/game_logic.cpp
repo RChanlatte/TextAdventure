@@ -504,19 +504,22 @@ void talkCommand(std::vector<std::string> &commandDir, room &currentLoc)
 
 void takeCommand(std::vector<std::string> &commandDir, room &currentLoc, Player &player)
 {
-	if (currentLoc.itemPresent == true)
-	{
-		for (int i = 0; player.playerInv[i].itemName == "[SLOT]"; i++)
-		{
-			player.playerInv[i] = currentLoc.item_IFP;
-			std::cout << "\"I picked up " << currentLoc.item_IFP.itemName << ".\"";
-			currentLoc.itemPresent = false;
-			break;
-		}
-	}
+   if (commandDir[1] == "ITEM")
+   {
+      if (currentLoc.itemPresent == true)
+      {
+         for (int i = 0; player.playerInv[i].itemName == "[SLOT]"; i++)
+         {
+            player.playerInv[i] = currentLoc.item_IFP;
+            std::cout << "\"I picked up " << currentLoc.item_IFP.itemName << ".\"";
+            currentLoc.itemPresent = false;
+            break;
+         }
+      }
+   }
 	else
 	{
-		std::cout << "\"There is nothing to take.\"";
+		std::cout << "\"There is no item to take.\"";
 	}
 }
 
@@ -557,9 +560,9 @@ void parse(std::string &input, Player &player, room &currentRm, room *Rooms)
 	std::vector<std::string> commandVec;
 	char illegalChars[41] = "0123456789`~!@#$%^&*()-_=+[]{}|;\'\",.<>?/";
 
-	ezStr::RemoveChar(input, illegalChars);
-	ezStr::ToUpper(input);
-	commandVec = ezStr::ToVector(input);
+	ezStr::Remove_Char(input, illegalChars);
+	ezStr::To_Upper(input);
+	commandVec = ezStr::To_Vector(input);
 
 	if (commandVec.size() > 0 && commandVec.size() < 3)
 	{
@@ -929,7 +932,7 @@ void puzzle_HANG()
       // accepts input
       std::cout << "\n\nInput a letter before you hang the man!\n\nYou currently have " << TRIES << " tries left.\n\n" << "Letter: ";
       std::cin >> inputStr;
-      ezStr::ToUpper(inputStr);
+      ezStr::To_Upper(inputStr);
 
       // checks against the word to guess and edits the buffer accordingly
       for (size_t i = 0; i < word_to_guess.length(); i++)
@@ -973,13 +976,13 @@ void PUZZLE_STATE(bool isDEBUG)
    std::string input;
    std::vector<std::string> commands;
 
-   if (IS_DEBUG)
+   if (isDEBUG)
    {
       std::cout << "#####\n\nPUZZLE STATE\n\n#####\n" << std::endl;
 
       std::getline(std::cin, input);
-      ezStr::ToLower(input);
-      commands = ezStr::ToVector(input);
+      ezStr::To_Lower(input);
+      commands = ezStr::To_Vector(input);
 
       if (commands[0] == "move" && commands[1] == "state")
       {

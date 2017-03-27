@@ -17,7 +17,7 @@ char const configFileName[12] = { "config.txt\0" };
 
 inline bool file_exist(const char* filename)
 {
-   std::ifstream infile(configFileName);
+   std::ifstream infile(filename);
    return infile.good();
 }
 
@@ -31,14 +31,10 @@ inline std::string file_toStr(const char* fileName)
    return fileContents;
 }
 
-// TODO: Make it so that you can adjust the size of the console
-//		 window inside the config file. Some of the work is done.
 inline void make_config()
 {
 	std::fstream configFileObj;
-   std::string fileContent;
-   char delim;
-   int conWidth, conHeight;
+   std::string fileContent, input;
 
    if (file_exist(configFileName))
    {
@@ -48,9 +44,9 @@ inline void make_config()
       {
          // puts contents of file into string
          fileContent = file_toStr(configFileName);
-         std::vector<std::string> tempVec = ezStr::ToVector(fileContent, 'x');
-         CONSOLE_WIDTH = stoi(tempVec[0]);
-         CONSOLE_HEIGHT = stoi(tempVec[1]);
+         std::vector<std::string> tempVec = ezStr::To_Vector(fileContent, 'x');
+         CONSOLE_WIDTH = (INT16)stoi(tempVec[0]);
+         CONSOLE_HEIGHT = (INT16)stoi(tempVec[1]);
          CONSOLE_BUFFER_WIDTH = CONSOLE_WIDTH;
          CONSOLE_BUFFER_HEIGHT = (CONSOLE_HEIGHT * 2);
       }
@@ -65,31 +61,43 @@ inline void make_config()
    }
    else
    {
-      std::cout << "Do you want to adjust the size of the console window? (Yes/No) No defaults to an arbitrary value.\n" << std::endl;
+      std::cout << "Do you want to adjust the size of the console window? ([Y]es/[N]o) No defaults to"
+                   " an arbitrary value.\n" << std::endl;
 
-      configFileObj.open(configFileName, std::ios::out);
-
-      if (configFileObj.is_open())
+      std::cin >> input;
+      ezStr::To_Lower(input);
+      if (input == "yes" || input == "y")
       {
-         // sets the widthxheight of the window
-         configFileObj << "150x300";
-         configFileObj.close();
-      }
-      else if (!configFileObj.is_open())
-      {
-         std::cout << "\n\n***Error***\nConfig file could not be opened.\n***ERROR***\n\n";
-         configFileObj.close();
+         std::cout << "Put in as \"widthxheight\".\n" << std::endl;
+         input.clear();
+         std::cin >> input;
       }
       else
       {
-         std::cout << Generic_Err;
-         configFileObj.close();
-      }
+         configFileObj.open(configFileName, std::ios::out);
 
-      CONSOLE_WIDTH = 150;
-      CONSOLE_HEIGHT = 300;
-      CONSOLE_BUFFER_WIDTH = CONSOLE_WIDTH;
-      CONSOLE_BUFFER_HEIGHT = (CONSOLE_HEIGHT * 2);
+         if (configFileObj.is_open())
+         {
+            // sets the widthxheight of the window
+            configFileObj << "150x300";
+            configFileObj.close();
+         }
+         else if (!configFileObj.is_open())
+         {
+            std::cout << "\n\n***Error***\nConfig file could not be opened.\n***ERROR***\n\n";
+            configFileObj.close();
+         }
+         else
+         {
+            std::cout << Generic_Err;
+            configFileObj.close();
+         }
+
+         CONSOLE_WIDTH = 150;
+         CONSOLE_HEIGHT = 300;
+         CONSOLE_BUFFER_WIDTH = CONSOLE_WIDTH;
+         CONSOLE_BUFFER_HEIGHT = (CONSOLE_HEIGHT * 2);
+      }
    }
 }
 
