@@ -1,5 +1,7 @@
 #include "game_logic.h"
 
+#pragma warning (disable:4702)
+
 bool NUM_PUZZ_CMPT = false;
 bool HANG_PUZZ_CMPT = false;
 
@@ -508,6 +510,8 @@ void takeCommand(std::vector<std::string> &commandDir, room &currentLoc, Player 
    {
       if (currentLoc.itemPresent == true)
       {
+
+
          for (int i = 0; player.playerInv[i].itemName == "[SLOT]"; i++)
          {
             player.playerInv[i] = currentLoc.item_IFP;
@@ -516,11 +520,12 @@ void takeCommand(std::vector<std::string> &commandDir, room &currentLoc, Player 
             break;
          }
       }
+
+      else
+      {
+         std::cout << "\"There is no item to take.\"";
+      }
    }
-	else
-	{
-		std::cout << "\"There is no item to take.\"";
-	}
 }
 
 void useCommand(room &currentLoc, room *Rooms, Player &player)
@@ -609,7 +614,7 @@ void parse(std::string &input, Player &player, room &currentRm, room *Rooms)
 void puzzle_NUM()
 {
    int numAns = 14;
-   int response;
+   int response = -1;
 
    std::cout << "Asgoth: \"Alright! The objective is to guess the number! My superior 14 year-old "
                << "intellect, makes you no match! HA! You'll have THREE TRIES, before this cool "
