@@ -103,22 +103,113 @@ void expo_story(int milestone)
                      " ought to go home... I'd g-go, uhh, South, I guess.\"";
          break;
       case BULLY_PUZZLE:
-         exposition = "BULLY_PUZZLE";
+         exposition = "With his head held low, Valorre walks through the Commons double door. Before" 
+                     " he could react, he's immediately stopped by Asgoth, the warrior prince" 
+                     " outfitted with a tacky orange jersey plastered with a black \"14\" on the" 
+                     " front. Accompanying Asgoth was his meagre accomplice, Volkun, the male" 
+                     " Valkyrie. \"Hey, Necro! I heard you got a boner for the wizard! How pathetic!"
+                     " A mature 14 year-old LIKE ME would NEVER be caught with my pants down like"
+                     " that! Ha!\" Asgoth laughed and Volkun nervously chortled in passive agreement." 
+                     " Not fully paying attention, Valorre wondered where he got that jersey. He had"
+                     " never seen Asgoth wear it before. Not fully knowing or understanding Asgoth's"
+                     " great vanity, Valorre sincerely hoped he didn't get a jersey just to" 
+                     " commemorate his 14th birthday... Did he? \"Listen, since getting aroused by" 
+                     " dudes isn't in the warrior's spirit, and this 14, basically adult, teen has" 
+                     " things to do, I'll keep this short.I'll take it easy on ya today, so try and"
+                     " guess the number I'm thinking of and this magnanimous 10 + 4 year - old will"
+                     " let you go.\" With his chest puffed out and a cowering Volkun at his side,"
+                     " he gets ready to continue.";
          break;
       case PUNISH:
-         exposition = "PUNISH";
+         exposition = "Dragged into the white enchantress's office, Valorre and Asgoth sit still and"
+                     " await further instruction. Asgoth appears apathetic as his father, is a known"
+                     " PTA member with financial interest in the school. It doesn't seem like"
+                     " anything meaningful will come of this despite Asgoth's deliberate agitation,"
+                     " and Valorre will most likely be blamed. Again. The mere thought plunges"
+                     " Valorre into a silent state of disarray. He cannot get into any trouble again!"
+                     "  His father has gotten increasingly aggressive at his proclaimed"
+                     " \"participation\" in these scuffles with Asgoth. Why won't he understand!"
+                     " There isn't much a necromancer can do, especially not around here. If anyone"
+                     " would understand, Valorre figured it'd be his own father. Without a second"
+                     " thought, the door is flung open and the Dean saunters in. \"Oh.It's you two"
+                     " again. A trial in Pond for Valorre and a word with Asgoth. The portal is there,"
+                     " Valorre, go now!\" Valorre is hurried through a portal and transported. The"
+                     " trip is much of the same. Flashing lights and disorientating images flicker"
+                     " before Valorre's stone - cold face.Stoic from a numbing abject despair and a"
+                     " frequent acceptance of lop - sided dealings at his expense.Abruptly, Valorre"
+                     " is dropped on his backside in an unusual, but no less familiar place.Black sky,"
+                     " desolate ground, strange cinnamon snack smell, Pond hadn't changed, but Valorre"
+                     " had. \"I guess I ought to go South. A-about the only w-way I can go.\"";
          break;
       case EXE_HANGMAN:
-         exposition = "EXECUTIONER HANGMAN";
+         exposition = "Valorre steps down South and finds a gallow set up high.A young school kid is"
+                     " strapped to the gallow tightly, he cannot be freed it seems. \"What in the world"
+                     " is going on h-?!\" Before Valorre could finish a stocky pig-man drops from the"
+                     " sky and stops Valorre in his tracks. \"Nya-ha! Looks like you're back, Valorre..."
+                     " You may have bested me the last twelve times this year, but I'VE GOT YOU THIS"
+                     " TIME! This kawaii piggu is gonna get-you! \" Valorre can hardly contain his"
+                     " disgust at the prospect of this morbidly obese pig-man being cute, let alone"
+                     " kawaii. \"I've got you now, young-blood! You won't be able to guess this cute"
+                     " descriptor, and if you can't, this young boy will be... Well, let's just say,"
+                     " I'll take out this kawaii trash, NYA!~\" At the pig-man's raccuous laughter,"
+                     " the boy is awakened and, at the sudden realization of the current state of"
+                     " affairs, begins to freak out. \"By t-the gods! I j-just won a Magic: The"
+                     " Gathering game! We never agreeed to this! You were supposed to give me your"
+                     " cute shoes! This is bull-!\" The kawaii pig-man slams his piggu-foot down and"
+                     " rattles the gallows. \"Silence knave! Your flattering boyish charm won't get"
+                     " you out of this mess, this time!... Now then... You surely understand the"
+                     " severity of the situation, no? Now you must fight for this kawa-- I mean,"
+                     " obnoxious boy's life! NYA-HA!\" Mildly annoyed, Valorre complies.";
          break;
       case REDEMPTION:
-         exposition = "REDEMPTION";
+         exposition = "Returning from Pond was somber. Nobody seemed to care, which is typical."
+                     " Valorre isn't convinced they've ever cared, but it doesn't matter. A quick"
+                     " glance at the clock reveals that Valorre wasted a bit more time than necessary."
+                     " It's about 4 o'clock now. Time to go. \"Guess I need to go East. I j-just want"
+                     " to go home... I need to make it South, past the Commons.\"";
          break;
       case BULLY_END:
-         exposition = "BULLY_END";
+         exposition = "Valorre walks into the Courtyard. It's pretty dead, nobody is around. Everyone"
+                     " would've left about two hours ago, so the barren yard is typical. \"I hate"
+                     " leaving so early... I-I never h-have time for anything when this h-happens.\""
+                     " Valorre begins to hurry toward the Portal Crossings so he could leave, but it"
+                     " swiftly knocked down by Asgoth. Enraged, Valorre gets up fast and with purpose."
+                     " He's tired of being bullied by this vain jerk. Asgoth laughes, but says"
+                     " nothing. Valorre furrows his brow, and the two scowl at each other for what"
+                     " seems like eternity. Within a moment's notice, Asgoth begins his assault, but"
+                     " Valorre is not nearly as swift. Valorre is knocked to the ground, but don't"
+                     " count him out just yet! Valorre begins an encantation and--! At just that"
+                     " moment, Valorre is interrupted by the Dean. Who throws them both to opposite"
+                     " ends of the courtyard with a strong push of force. At that point in time, The"
+                     " Dean exclaims \"Go, Valorre. I'll handle Asgoth, and ensure that his father is"
+                     " aware of his behavior. It is about time Asgoth got his.\" Asgoth begins to"
+                     " pout and throw a tantrum. \"B-BUT, THIS IS BULL--\" At that point, the Dean"
+                     " conjures an ethereal chain that hinders Asgoth's speaking. \"Be, QUIET! You've"
+                     " said enough. Go, Valorre. Just continue South, and you will be fine.\" Valorre"
+                     " in disbelief, scrambles up and begins his way South to the Portal Crossing.";
          break;
       case END_GAME:
-         exposition = "END OF THE GAME";
+         exposition = "Valorre makes it to the crossing. As he stands in front of a massive portal,"
+                     " he reflects. Unsure of himself or his future. Although glad he never has to"
+                     " come to this forsaken school again, he wonders if his secondary school"
+                     " experience will be better... \"P - portals are... Interesting. Incorrectly"
+                     " traverse and you could... just oblivion. Doesn't sound half bad.\" Valorre's"
+                     " increasingly reckless and debased thinking edges him toward an awkward angle,"
+                     " relative to the portal.At this strange angle, it should be easy, to..."
+                     " Preferring this fate to what his father may do to him, he inches closer to the"
+                     " portal. \"It would be so... ea--!\" At that moment, Volkun quickly emerges from"
+                     " the portal. The two exchange glances momentarily. Empathetically, Volkun says,"
+                     " \"H-hey, uhh. I'm sorry. He didn't mean it, I don't think a-at least. I.. I"
+                     " know you're not a bad guy. I'm just too much of a c-coward to s-stop him, I"
+                     " guess. I know it isn't fair t-to you, b-but I hope you u-understand... See you"
+                     " n-next year, I guess.\" Volkun awkwardly pats Valorre on the shoulder, not"
+                     " entirely sure of himself or whether or not his words are welcome. Volkun frowns,"
+                     " looks forward, and continues on. Vallore is speechless and slightly less"
+                     " dejected than before, processes what just occurred and Volkun's surprisingly"
+                     " kind words. Valorre stands silent for about five minutes, staring deeply into"
+                     " the portal. \"I guess... It's okay. I don't know, I-I don't really c-care. I..."
+                     " Whatever.\" Valorre rights his angling and walks into the portal properly,"
+                     " careening himself home to his father's swamp home.";
          break;
       default:
          exposition = "\n###INVALID STORY MILESTONE.###\n";
@@ -126,7 +217,7 @@ void expo_story(int milestone)
    }
 
    exposition = ezStr::ConsoleBuffer_Newline(exposition, CONSOLE_BUFFER_WIDTH);
-   std::cout << "\n" << exposition << "\n" << std::endl;
+   std::cout << "\n" << exposition << "\n\nPress any key to continue...";
    getchar();
 }
 
@@ -564,7 +655,9 @@ void parse(std::string &input, Player &player, room &currentRm, room *Rooms)
 {
 	std::vector<std::string> commandVec;
 
-   ezStr::Cleanse_Alpha(input, 'u');
+   ezStr::Remove_Chars(input, ezStr::PUNCTUATION);
+   ezStr::Remove_Chars(input, ezStr::NUMBERS_10);
+   ezStr::To_Upper(input);
 	commandVec = ezStr::To_Vector(input);
 
 	if (commandVec.size() > 0 && commandVec.size() < 3)
@@ -888,7 +981,7 @@ void update_gameBoard(const int& tries)
 void puzzle_HANG()
 {
    std::string inputStr, bufferStr;
-   std::string word_to_guess = "TEST STRING";
+   std::string word_to_guess = "KAWAII";
    bufferStr = word_to_guess;
    int TRIES = 6;
    bool GAME_WON = false;
@@ -908,53 +1001,61 @@ void puzzle_HANG()
       }
    }
 
+   // initialize execuitioner's gallows
+   update_gameBoard(TRIES);
+
    while (TRIES > 0)
    {
       size_t count = 0;
       bool notFound = true;
-
-      // initialize execuitioner's gallows
-      update_gameBoard(TRIES);
 
       // displays the buffer string each iteration and checks if it is completely dashes
       for (size_t i = 0; i < word_to_guess.length(); i++)
       {
          std::cout << bufferStr[i];
 
-         if (bufferStr[i] != '-')
-         {
-            count++;
-            continue;
-         }
-         else if (count >= (word_to_guess.length() - 1))
+         if (count == (word_to_guess.length() - 1))
          {
             GAME_WON = true;
          }
-      }
-
-      // accepts input
-      std::cout << "\n\nInput a letter before you hang the man!\n\nYou currently have " << TRIES << " tries left.\n\n" << "Letter: ";
-      std::cin >> inputStr;
-      ezStr::Cleanse_Alpha(inputStr, 'u');
-
-      // checks against the word to guess and edits the buffer accordingly
-      for (size_t i = 0; i < word_to_guess.length(); i++)
-      {
-         if (inputStr[0] == word_to_guess[i])
+         else if (bufferStr[i] != '-')
          {
-            bufferStr[i] = inputStr[0];
-            notFound = false;
-            continue;
+            count++;
          }
       }
+
+      std::wcout << "\n" <<std::endl;
+
+      if (GAME_WON)
+      {
+         break;
+      }
+      else if (!GAME_WON)
+      {
+         // accepts input
+         std::cout << "\n\nInput a letter before you hang the man!\n\nYou currently have " << TRIES << " tries left.\n\n" << "Letter: ";
+         std::cin >> inputStr;
+         ezStr::Cleanse_Alpha(inputStr, 'u');
+
+         // checks against the word to guess and edits the buffer accordingly
+         for (size_t i = 0; i < word_to_guess.length(); i++)
+         {
+            if (inputStr[0] == word_to_guess[i])
+            {
+               bufferStr[i] = inputStr[0];
+               notFound = false;
+               continue;
+            }
+         }
+         // update gallows
+         update_gameBoard(TRIES);
+      }
+      
       if (notFound)
       {
          std::cout << "\n\nUh-oh! Looks like you missed a letter!\n" << std::endl;
          --TRIES;
-      }
-      else if (GAME_WON)
-      {
-         break;
+         continue;
       }
    }
 
@@ -984,7 +1085,8 @@ void PUZZLE_STATE(bool isDEBUG)
       std::cout << "#####\n\nPUZZLE STATE\n\n#####\n" << std::endl;
 
       std::getline(std::cin, input);
-      ezStr::Cleanse_Alpha(input, 'l');
+      ezStr::To_Lower(input);
+      ezStr::Remove_Chars(input, ezStr::PUNCTUATION);
       commands = ezStr::To_Vector(input);
 
       if (commands[0] == "move" && commands[1] == "state")
@@ -998,6 +1100,10 @@ void PUZZLE_STATE(bool isDEBUG)
       else if (commands[0] == "start" && commands[1] == "hang")
       {
          puzzle_HANG();
+      }
+      else
+      {
+         std::cout << "\nI don't understand that!\n" << std::endl;
       }
    }
    else
@@ -1040,6 +1146,7 @@ void FREE_ROAM_STATE(bool isDEBUG)
 
       std::cout << "\nPlease input a command: ";
       std::getline(std::cin, userInput);
+      std::cout << "\n" << std::endl;
       DEBUG::echo(userInput);
       std::cout << "Vallore: ";
       double inGame_Update = GetCurrentTime();
